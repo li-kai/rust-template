@@ -1,0 +1,36 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(cargo test*)",
+            "command": "jq -r '.tool_input.command' | sed 's/^cargo test/just test/' | jq -Rnc '{hookSpecificOutput:{hookEventName:\"PreToolUse\",updatedInput:{command:input}}}'"
+          },
+          {
+            "type": "command",
+            "if": "Bash(cargo check*)",
+            "command": "jq -r '.tool_input.command' | sed 's/^cargo check/just check/' | jq -Rnc '{hookSpecificOutput:{hookEventName:\"PreToolUse\",updatedInput:{command:input}}}'"
+          },
+          {
+            "type": "command",
+            "if": "Bash(cargo clippy*)",
+            "command": "jq -r '.tool_input.command' | sed 's/^cargo clippy/just check/' | jq -Rnc '{hookSpecificOutput:{hookEventName:\"PreToolUse\",updatedInput:{command:input}}}'"
+          },
+          {
+            "type": "command",
+            "if": "Bash(cargo build*)",
+            "command": "jq -r '.tool_input.command' | sed 's/^cargo build/just build/' | jq -Rnc '{hookSpecificOutput:{hookEventName:\"PreToolUse\",updatedInput:{command:input}}}'"
+          },
+          {
+            "type": "command",
+            "if": "Bash(cargo fmt*)",
+            "command": "jq -r '.tool_input.command' | sed 's/^cargo fmt/just fmt/' | jq -Rnc '{hookSpecificOutput:{hookEventName:\"PreToolUse\",updatedInput:{command:input}}}'"
+          }
+        ]
+      }
+    ]
+  }
+}
