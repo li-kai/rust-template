@@ -30,6 +30,7 @@
           inherit pkgs;
           packages = [
             pkgs.just
+            pkgs.cargo-nextest
             # Add your project's native dependencies here.
           ];
         };

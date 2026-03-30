@@ -1,0 +1,10 @@
+[profile.default]
+# Only show failing tests, not passing ones
+status-level = "fail"
+
+# Show failure output immediately, hide passing test output
+failure-output = "immediate"
+success-output = "never"
+
+# Warn about slow tests
+slow-timeout = { period = "5s" }
