@@ -4,11 +4,12 @@
 
 set positional-arguments := true
 set dotenv-load := true
+set quiet := true
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
 # Default: show all recipes
 default:
-    @just --list
+    just --list
 
 # Build the project
 build *args:
@@ -17,7 +18,7 @@ build *args:
 # Run tests
 [no-exit-message]
 test *args:
-    cargo test -q {{ args }}
+    cargo nextest run {{ args }}
 
 # Check code with clippy and dylint (no modifications)
 check *args:
