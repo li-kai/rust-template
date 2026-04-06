@@ -28,6 +28,7 @@
       devShells = forAllSystems ({ pkgs }: {
         default = rust-lints.lib.mkDevShell {
           inherit pkgs;
+          extraRustComponents = [ "rust-analyzer" ];
           packages = [
             pkgs.just
             pkgs.cargo-nextest
