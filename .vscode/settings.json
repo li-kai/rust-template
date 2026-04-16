@@ -12,7 +12,7 @@
   "rust-analyzer.cargo.features": "all",
   "rust-analyzer.check.command": "clippy",
   "rust-analyzer.imports.granularity.enforce": true,
-  "rust-analyzer.imports.granularity.group": "item",
+  "rust-analyzer.imports.granularity.group": "module",
   "rust-analyzer.imports.group.enable": true,
 
   // File watching
