@@ -34,6 +34,13 @@
             pkgs.cargo-nextest
             # Add your project's native dependencies here.
           ];
+          shellHook = ''
+            if git rev-parse --git-dir >/dev/null 2>&1 && [ -d .githooks ] && \
+               [ "$(git config --local --get core.hooksPath 2>/dev/null)" != ".githooks" ]; then
+              git config --local core.hooksPath .githooks
+              echo "pre-commit hook installed (core.hooksPath=.githooks)"
+            fi
+          '';
         };
       });
     };

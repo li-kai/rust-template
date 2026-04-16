@@ -13,18 +13,13 @@ Rust project template with [dylint] lints, Nix flake, direnv, clippy, and rustfm
 
 2. **Rename the package** — update `name` in `Cargo.toml`.
 
-3. **Enter the dev shell**:
+3. **Enter the dev shell** (pre-commit hook auto-installs on first entry):
    ```sh
    direnv allow   # if using direnv
    nix develop    # otherwise
    ```
 
-4. **Install the pre-commit hook**:
-   ```sh
-   git config core.hooksPath .githooks
-   ```
-
-5. **Build and test**:
+4. **Build and test**:
    ```sh
    just build
    just test
