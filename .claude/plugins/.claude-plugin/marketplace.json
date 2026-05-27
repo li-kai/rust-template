@@ -1,0 +1,14 @@
+{
+  "name": "rust-template-local",
+  "owner": {
+    "name": "rust-template"
+  },
+  "plugins": [
+    {
+      "name": "rust-analyzer",
+      "source": "./rust-analyzer",
+      "description": "Rust LSP: navigation plus clippy diagnostics via checkOnSave",
+      "version": "0.1.0"
+    }
+  ]
+}

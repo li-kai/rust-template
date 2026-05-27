@@ -1,4 +1,7 @@
 {
+  "enabledPlugins": {
+    "rust-analyzer@rust-template-local": true
+  },
   "hooks": {
     "PreToolUse": [
       {

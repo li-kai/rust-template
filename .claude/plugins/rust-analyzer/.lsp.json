@@ -1,0 +1,20 @@
+{
+  "rust": {
+    "command": "rust-analyzer",
+    "args": [],
+    "extensionToLanguage": { ".rs": "rust" },
+    "transport": "stdio",
+    "initializationOptions": {
+      "checkOnSave": true,
+      "check": {
+        "command": "clippy",
+        "extraArgs": ["--", "-D", "warnings"]
+      },
+      "cargo": {
+        "features": "all",
+        "allTargets": true,
+        "targetDir": true
+      }
+    }
+  }
+}
