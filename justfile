@@ -20,40 +20,23 @@ build *args:
 [no-exit-message]
 test *args:
     #!/usr/bin/env bash
-    # -e intentionally omitted to capture individual exit codes
+    # -e intentionally omitted so a failing runner doesn't mask the other's code.
     set -uo pipefail
-    if [[ $# -eq 0 ]]; then
-        # Run doctests in background, capture output
-        doctest_out=$(mktemp)
-        trap 'rm -f "$doctest_out"' EXIT
-        just doctest > "$doctest_out" 2>&1 &
-        doctest_pid=$!
-
-        # Run nextest in foreground
-        nextest_ok=true
-        cargo nextest run || nextest_ok=false
-
-        # Wait for doctests and capture exit code
-        doctest_ok=true
-        wait $doctest_pid || doctest_ok=false
-
-        # Show doctest results based on nextest outcome
-        if $nextest_ok; then
-            echo ""
-            cat "$doctest_out"
-        else
-            # Just show summary
-            if grep -q "^test result:" "$doctest_out"; then
-                echo ""
-                echo "Doc tests: $(grep "^test result:" "$doctest_out")"
-            fi
-        fi
-
-        # Exit with failure if either failed
-        $nextest_ok && $doctest_ok
-    else
-        cargo nextest run {{ args }}
+    # With args (e.g. a filter), defer entirely to nextest — doctests aren't run.
+    if [[ $# -ne 0 ]]; then
+        exec cargo nextest run {{ args }}
     fi
+    # No args: run doctests in parallel with nextest, buffering their output so
+    # the two streams don't interleave, then print it once nextest finishes.
+    doctest_out=$(mktemp)
+    trap 'rm -f "$doctest_out"' EXIT
+    just doctest > "$doctest_out" 2>&1 &
+    doctest_pid=$!
+    cargo nextest run; nextest_rc=$?
+    wait $doctest_pid; doctest_rc=$?
+    echo
+    cat "$doctest_out"
+    (( nextest_rc == 0 && doctest_rc == 0 ))
 
 # Run doc tests only (nextest doesn't support doc tests)
 doctest *args:
