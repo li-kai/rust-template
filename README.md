@@ -13,7 +13,7 @@ Rust project template with [dylint] lints, Nix flake, direnv, clippy, and rustfm
 
 2. **Rename the package** — update `name` in `Cargo.toml`.
 
-3. **Enter the dev shell** (pre-commit hook auto-installs on first entry):
+3. **Enter the dev shell** (hk pre-commit hook auto-installs on first entry):
    ```sh
    direnv allow   # if using direnv
    nix develop    # otherwise
@@ -34,7 +34,7 @@ Rust project template with [dylint] lints, Nix flake, direnv, clippy, and rustfm
 | `rustfmt.toml` | Edition 2024, grouped imports |
 | `clippy.toml` | Allows `unwrap`/`expect` in tests |
 | `Cargo.toml [lints]` | Comprehensive clippy configuration |
-| `.githooks/pre-commit` | Auto-fix, format, lint, and banned crate detection |
+| `hk.pkl` | [hk](https://hk.jdx.dev) git-hook config: auto-fix, format, lint, and banned crate detection |
 | `justfile` | Build, test, check, fix, fmt recipes |
 
 ## Linting
