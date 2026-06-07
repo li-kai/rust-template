@@ -76,10 +76,6 @@ fix *args:
 fmt *args:
     cargo fmt --all {{ args }}
 
-# Watch and rebuild on changes
-watch *args='build':
-    cargo watch -x {{ args }}
-
 # Clean build artifacts
 [confirm("This will delete all build artifacts. Continue?")]
 clean:
